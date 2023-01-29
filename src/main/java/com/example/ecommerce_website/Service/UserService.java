@@ -49,12 +49,12 @@ public class UserService {
     }
 
     ////Create endpoint where user can add product to a merchantStock
-    public boolean AddProduct(int productid , int merchantid , int stock) {
+    public boolean AddProduct(int productid , int merchantid , int stock ,Product product) {
         ArrayList<MerchantStock> merchantStocks = merchantStockService.GetAll();
         for (int i = 0; i < merchantStocks.size(); i++) {
             if (merchantStocks.get(i).getProductid() == productid && merchantStocks.get(i).getMerchantid() == merchantid) {
                 int new_stok = merchantStocks.get(i).getStock()+stock;
-                merchantStocks.get(i).setStock(new_stok);
+                merchantStocks.get(i).setStock(stock);
                 return true;
             }
         }

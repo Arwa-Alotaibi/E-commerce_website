@@ -73,12 +73,12 @@ public class UserController {
     }
 
     @PutMapping("/product/{productid}/{merchantid}/{stock}")
-    public ResponseEntity Addproduct(@PathVariable int productid , @PathVariable int merchantid  , @PathVariable int stock ,@Valid @RequestBody User user, Errors errors){
+    public ResponseEntity Addproduct(@PathVariable int productid , @PathVariable int merchantid  , @PathVariable int stock ,@Valid @RequestBody User user ,@RequestBody Product product ,Errors errors){
         if(errors.hasErrors()){
             String message =errors.getFieldError().getDefaultMessage();
             return ResponseEntity.status(400).body(message);
         }
-        boolean add =userService.AddProduct(productid ,  merchantid ,  stock);
+        boolean add =userService.AddProduct(productid ,  merchantid ,  stock,product);
         if(add){
             return ResponseEntity.status(200).body("user added product to a merchantStock :) !");
         }
